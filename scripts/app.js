@@ -18,15 +18,26 @@ $(document).on("ready", function() {
     $.ajax({
         method: 'GET',
         url: monthlyQuakesEndpoint,
+        dataType: 'json',
+
         success: function onSuccess(onJson) {
             console.log(onJson);
-            var earthquakeMagnitude = $('#earthQuakeMonth').append(onJson.features[0].properties.mag);
-            var earthquakeLocation = $('#earthQuakeMonth').append(onJson.features[0].properties.place);
-        },
-        forEach()
-        error: function onError(onJson, status) {
-            console.log(onJson, status);
-        }
+
+              onJson.features.forEach(function(listElements) {
+
+              var mag = listElements.properties.mag;
+              var place = listElements.properties.place;
+              console.log(mag);
+
+
+
+                $('#earthQuakeMonth').append('<div id="mag"><strong> M </strong>' + mag +'<strong> - </strong>' + place + '</div>');
+                });
+             }
+
+        // error: function onError(onJson, status) {
+        //     console.log(onJson, status);
+        // }
 
     });
 });
